@@ -8,6 +8,7 @@ public class AntBrain : MonoBehaviour
     public float steerStrength = 2;
     public float wanderStrength = 1;
     public GameObject targetFood;
+    public Transform head;
 
     Vector2 position;
     Vector2 velocity;
