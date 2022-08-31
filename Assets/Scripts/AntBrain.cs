@@ -7,14 +7,18 @@ public class AntBrain : MonoBehaviour
     public float maxSpeed = 2;
     public float steerStrength = 2;
     public float wanderStrength = 1;
+    public GameObject targetFood;
 
     Vector2 position;
     Vector2 velocity;
     Vector2 desiredDirection;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -31,6 +35,15 @@ public class AntBrain : MonoBehaviour
 
         float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
         transform.SetPositionAndRotation(position, Quaternion.Euler(0, 0, angle));
-    }
 
+
+        
+    }
+void FindFood()
+    {
+        
+    }
 }
+
+
+    
