@@ -4,46 +4,104 @@ using UnityEngine;
 
 public class AntBrain : MonoBehaviour
 {
-    public float maxSpeed = 2;
-    public float steerStrength = 2;
-    public float wanderStrength = 1;
-    public GameObject targetFood;
-    public Transform head;
 
-    Vector2 position;
-    Vector2 velocity;
-    Vector2 desiredDirection;
+    [Header("RandomMovement")]
+    public float accelerationTime = 2f;
+    public float maxSpeed2 = 5f;
+    private Vector2 movement;
+    private float timeLeft;
+    public bool randomMove;
 
+    [Header("PheromoneTrack")]
+    public GameObject walkingTrack;
+    public GameObject foodTrack;
+    private float i = 0;
 
+    [Header("FoodFinder")]
+    public bool foodFound;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        randomMove = true;
     }
 
+    void FixedUpdate()
+    {
+        GetComponent<Rigidbody2D>().AddForce(movement * maxSpeed2);
+    }
     // Update is called once per frame
     void Update()
     {
-        desiredDirection = (desiredDirection + Random.insideUnitCircle * wanderStrength).normalized;
+        if (Time.time > i)
+        {
+            i += 0.5f;
+            InstantiatePheromone();
+        }
 
-        Vector2 desiredVelocity = desiredDirection * maxSpeed;
-        Vector2 desiredSteeringFroce = (desiredVelocity - velocity) * steerStrength;
-        Vector2 acceleration = Vector2.ClampMagnitude(desiredSteeringFroce, steerStrength) / 1;
-
-        velocity = Vector2.ClampMagnitude(velocity + acceleration * Time.deltaTime, maxSpeed);
-        position += velocity * Time.deltaTime;
-
-        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-        transform.SetPositionAndRotation(position, Quaternion.Euler(0, 0, angle));
+        if (randomMove)
+        {
+            MovingRandom();
+        }
 
 
-        
+
     }
-void FindFood()
+
+
+    private void OnCollisionEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            randomMove = false;
+        }
     }
+
+
+
+    void MovingRandom()
+    {
+        timeLeft -= Time.deltaTime;
+        if (timeLeft <= 0)
+        {
+            movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            timeLeft += accelerationTime;
+        }
+
+        Vector2 dir = transform.GetComponent<Rigidbody2D>().velocity;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+
+
+    void InstantiatePheromone()
+    {
+        if (!foodFound)
+        {
+            Instantiate(walkingTrack, transform.position, transform.rotation);
+        }
+        else
+        {
+            Instantiate(foodTrack, transform.position, transform.rotation);
+        }
+    }
+
+    void FollowTrack()
+    {
+
+    }
+
+    void FindFood()
+    {
+
+    }
+
+//    1.Raycast in the direction you are moving.
+    //2.In your update once the raycast gets within a certain distance say 0.2 unity units..
+    //3.dont allow movement in that direction
+    //4.and so once the player pushes a button in that direction you raycast to see if there a wall
+    //For this setup to work you just will need 8 raycasts two for each direction you can move to define the width of the object.
 }
 
 

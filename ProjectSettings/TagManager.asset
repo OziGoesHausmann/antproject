@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Obstacle
+  - walkingTrick
+  - foodTrack
+  - walkingTrack
   layers:
   - Default
   - TransparentFX

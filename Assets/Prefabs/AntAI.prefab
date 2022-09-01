@@ -92,9 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8586004361279829845}
-  - component: {fileID: 8586004361279829846}
   - component: {fileID: 7844342487593142076}
   - component: {fileID: 2816892563191707135}
+  - component: {fileID: 8586004361279829846}
   m_Layer: 0
   m_Name: AntAI
   m_TagString: Untagged
@@ -111,28 +111,12 @@ Transform:
   m_GameObject: {fileID: 8586004361279829847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.78, y: 0.64, z: -0.4664551}
-  m_LocalScale: {x: 1.18, y: 1.18, z: 1.18}
+  m_LocalScale: {x: 1.1397147, y: 1.1397147, z: 0.96586}
   m_Children:
   - {fileID: 6379506787240911845}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8586004361279829846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8586004361279829847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea1e198c5fbb444ab6b78e4ad724f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 5
-  steerStrength: 5
-  wanderStrength: 0.1
-  targetFood: {fileID: 0}
 --- !u!50 &7844342487593142076
 Rigidbody2D:
   serializedVersion: 4
@@ -148,7 +132,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -167,6 +151,27 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.7592741, y: 0.06}
-  m_Size: {x: 2.7896044, y: 1.1242071}
+  m_Offset: {x: -0.91, y: 0.06}
+  m_Size: {x: 2.52, y: 0.94}
   m_Direction: 1
+--- !u!114 &8586004361279829846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8586004361279829847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea1e198c5fbb444ab6b78e4ad724f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 5
+  steerStrength: 5
+  wanderStrength: 0.1
+  randomMove: 0
+  accelerationTime: 1
+  maxSpeed2: 1
+  walkingTrack: {fileID: 2996984428475001910, guid: 912df87d8cd4f234faee68200c07d2e9, type: 3}
+  foodTrack: {fileID: 5955900393785410813, guid: da6bf69cec239d0438f3f9b169f6b185, type: 3}
+  foodFound: 0
